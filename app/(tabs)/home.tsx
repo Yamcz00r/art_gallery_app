@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { ScrollView, Text, View, SafeAreaView, FlatList, ActivityIndicator } from "react-native";
-import useInfiteScroll from "../../hooks/useFetch";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 
 export default function Home() {
    
-    const { data, isLoading, error } = useInfiteScroll('artworks', { limit: 15, page: 1 });
-    
+    const {data, isLoading, error, handleNextPage} = useInfiniteScroll("artworks", {page: 1, limit: 15})
 
     return (
         <SafeAreaView style={{backgroundColor: "#FFF", flex: 1}}>
@@ -21,7 +20,7 @@ export default function Home() {
                             <Text style={{fontFamily: "Poppins-Bold", fontSize: 20}}>{item.title}</Text>
                             <Text style={{fontFamily: "Poppins-Regular", fontSize: 15}}>{item.artist_display}</Text>
                         </View>
-                    )}  onEndReachedThreshold={0.1} />
+                    )} onEndReached={handleNextPage}  onEndReachedThreshold={0.1} />
 
                 )}
                    

@@ -11,6 +11,7 @@ const useInfiniteScroll = (endpoint: string, params: QueryParams) => {
     const url = "https://api.artic.edu/api/v1/";
 
     const handleNextPage = () => {
+        console.log("HERE!")
         if (page === 12339) {
             return 
         }
@@ -34,16 +35,16 @@ const useInfiniteScroll = (endpoint: string, params: QueryParams) => {
             }
         }
 
+        getData();
         const source = axios.CancelToken.source();
 
         return () => {
             source.cancel("Request canceled by cleanup")
         }
 
-        getData();
+        
     }, [page]);
 
-    return { data, isLoading, error, handleNextPage };
+    return {data, error, isLoading, handleNextPage}
 }
-
 export default useInfiniteScroll;
