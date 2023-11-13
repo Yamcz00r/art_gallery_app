@@ -3,34 +3,52 @@ import { Tabs } from "expo-router";
 
 export default function TabsLayout() {
     return (
-        <Tabs>
+        <Tabs screenOptions={{
+            tabBarStyle: {
+                backgroundColor: "#111827",
+                borderBlockStartColor: "#111827"
+            },
+            headerStyle: {
+                backgroundColor: "#111827",
+
+            },
+            headerShadowVisible: false
+        }}>
             <Tabs.Screen name="home" options={{
                 tabBarIcon: ({focused}) => {
-                    return ( <Ionicons name={focused ? "home" : "home-outline"} size={25} />);
+                    return ( <Ionicons color="#FFF" name={focused ? "home" : "home-outline"} size={30} />);
                 },
-                title: "Home",
-                headerTitle: "Gallery App",
-                headerTitleAlign: "left",
-                headerTitleAllowFontScaling: true,
-                headerBackgroundContainerStyle: {backgroundColor: "#FFF"},
-                headerTitleStyle: {fontFamily: "Poppins-Bold", fontSize: 20}
+                title: "",
+                headerTitle: "Explore",
+                headerTitleAlign: "center",
+                headerTitleStyle: {
+                    fontFamily: "Poppins-Bold",
+                    color: "#FFF"
+                }
             }}/>
             <Tabs.Screen name="search" options={{
                 tabBarIcon: ({focused}) => {
-                    return ( <Ionicons name={focused ? "search" : "search-outline"} size={25} />);
+                    return ( <Ionicons color="#FFF" name={focused ? "search" : "search-outline"} size={30} />);
                 },
-                title: "Search",
+                title: "",
                 headerTitle: "Search",
-                headerTitleAlign: "center"
+                headerTitleAlign: "center",
+                headerTitleStyle: {
+                    fontFamily: "Poppins-Bold",
+                    color: "#FFF"
+                }
             }}/>
             <Tabs.Screen name="favorites" options={{
                 tabBarIcon: ({focused}) => {
-                    return ( <Ionicons name={focused ? "star" : "star-outline"} size={25} />);
+                    return ( <Ionicons color="#FFF" name={focused ? "star" : "star-outline"} size={30} />);
                 },
-                
-                title: "Favorites",
+                title: "",
                 headerTitle: "Favorites",
                 headerTitleAlign: "center",
+                headerTitleStyle: {
+                    fontFamily: "Poppins-Bold",
+                    color: "#FFF"
+                }
             }}/>
         </Tabs>
     )

@@ -1,9 +1,10 @@
-
-
 import { useFonts } from "expo-font";
+import { useRouter } from "expo-router";
 import { Stack } from "expo-router";
 import { useCallback } from "react";
-import { preventAutoHideAsync, hideAsync, hide } from "expo-splash-screen";
+import { preventAutoHideAsync, hideAsync } from "expo-splash-screen";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { Ionicons } from "@expo/vector-icons";
 
 preventAutoHideAsync();
 
@@ -13,24 +14,57 @@ const StackLayout = () => {
     "Poppins-Bold": require("../assets/fonts/Poppins-Bold.ttf"),
     "Poppins-Medium": require("../assets/fonts/Poppins-Medium.ttf"),
   });
+  const router = useRouter();
+
+  const client = new QueryClient();
 
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
-        await hideAsync();
+      await hideAsync();
     }
   }, [fontsLoaded]);
 
   if (!fontsLoaded) return null;
 
   return (
-    <Stack onLayout={onLayoutRootView}>
-      <Stack.Screen
-        name="(tabs)"
-        options={{
-          headerShown: false,
+    <QueryClientProvider client={client}>
+      <Stack
+        screenOptions={{
+          headerStyle: {
+            backgroundColor: "#111327",
+          },
+          headerShadowVisible: false,
+          headerTitleStyle: {
+            fontFamily: "Poppins-Bold",
+            color: "#FFF",
+          },
+          headerTitleAlign: "center",
         }}
-      />
-    </Stack>
+        onLayout={onLayoutRootView}
+      >
+        <Stack.Screen
+          name="(tabs)"
+          options={{
+            headerShown: false,
+          }}
+        />
+        <Stack.Screen
+          name="artwork/[id]"
+          options={{
+            headerTitle: `Details`,
+            headerLeft: (props) => (
+              <Ionicons.Button
+                name="arrow-back-outline"
+                backgroundColor="#111327"
+                color="#FFF"
+                size={25}
+                onPress={() => router.back()}
+              />
+            ),
+          }}
+        />
+      </Stack>
+    </QueryClientProvider>
   );
 };
 export default StackLayout;
