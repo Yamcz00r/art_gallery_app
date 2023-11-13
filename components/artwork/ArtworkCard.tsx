@@ -8,7 +8,7 @@ interface ArtworkCardProps {
 const ArtworkCard = ({item}: ArtworkCardProps) => {
     return (
         <TouchableOpacity style={styles.main}>
-            
+            <Text>{item.artist_display}</Text>
         </TouchableOpacity>
     )
 
