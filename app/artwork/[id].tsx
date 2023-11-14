@@ -9,6 +9,7 @@ import { useGlobalSearchParams } from "expo-router";
 import useFetchSingle from "../api/useFetchSingle";
 import Header from "../../components/details/header/Header";
 import DetailsBody from "../../components/details/body/Body";
+import Footer from "../../components/details/footer/Footer";
 export default function ArtworkDetails() {
   const { id } = useGlobalSearchParams();
   const { result, isError, isLoading } = useFetchSingle(`artworks/${Number(id)}`)
@@ -53,7 +54,16 @@ export default function ArtworkDetails() {
               artist_title={result?.artist_title}
               description={result?.description}
               dimensions={result?.dimensions}
+              credit_line={result?.credit_line}
+              date_end={result?.date_end}
+              date_start={result?.date_start}
+              place_of_origin={result?.place_of_origin}
+              artist_id={result?.artist_id}
+              medium_display={result?.medium_display}
+              artwork_type_title={result?.artwork_type_title}
+              departament_title={result?.department_title}
             />
+            <Footer id={result?.id}/>
           </>
         )}
       </ScrollView>

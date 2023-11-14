@@ -21,10 +21,19 @@ export interface ArtworkItem {
   description?: string;
   dimensions?: string;
   medium_display?: string;
-  publication_history?: string;
-  exhibition_history?: string;
+  isZoomable?: boolean
+  credit_line?: string;
   latitude?: number;
   longitude?: number;
   artist_id: number;
   image_id?: string;
+  artwork_type_title?: string;
+  department_title?: string;
+}
+
+export interface ExploreArtworkItem {
+  id: number,
+  image_id?: string,
+  title?: string,
+  artist_title?: string;
 }

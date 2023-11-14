@@ -1,5 +1,6 @@
 import { useState } from "react";
-import { View, Text, Image, Dimensions, Pressable } from "react-native";
+import { View, Text, Dimensions, Pressable } from "react-native";
+import { Image } from "expo-image";
 import styles from "./Header.style";
 import PinchableImage from "./ZoomableImage";
 interface HeaderProps {
@@ -33,12 +34,12 @@ export default function Header(props: HeaderProps) {
               resizeMode: "cover",
               borderRadius: 10,
             }}
-            source={{
-              uri:
-                props.image_id === null
-                  ? "https://raw.githubusercontent.com/koehlersimon/fallback/master/Resources/Public/Images/placeholder.jpg"
-                  : `https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`,
-            }}
+            source={`${
+              props.image_id === null
+                ? "https://raw.githubusercontent.com/koehlersimon/fallback/master/Resources/Public/Images/placeholder.jpg"
+                : `https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`
+            }`}
+            focusable
           />
         </Pressable>
       </View>

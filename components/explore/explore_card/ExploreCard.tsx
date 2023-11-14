@@ -1,5 +1,6 @@
-import { View, Text, Image, Pressable } from "react-native";
-import { ArtworkItem } from "../../../types/fetch";
+import { View, Text, Pressable } from "react-native";
+import { Image } from "expo-image";
+import { ExploreArtworkItem } from "../../../types/fetch";
 import styles from "./ExploreCard.style";
 import { useRouter } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
@@ -7,7 +8,7 @@ import { TouchableOpacity } from "react-native-gesture-handler";
 import { useState } from "react";
 
 interface ExploreCardProps {
-  item: ArtworkItem;
+  item: ExploreArtworkItem;
 }
 
 export default function ExploreCard({ item }: ExploreCardProps) {
@@ -25,13 +26,12 @@ export default function ExploreCard({ item }: ExploreCardProps) {
     <View style={styles.card_container}>
       <Pressable onPress={() => handlePress(item.id)}>
         <Image
+          source={`${
+            item.image_id === null
+              ? "https://raw.githubusercontent.com/koehlersimon/fallback/master/Resources/Public/Images/placeholder.jpg"
+              : `https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`
+          }`}
           style={styles.card_image}
-          source={{
-            uri:
-              item.image_id === null
-                ? "https://raw.githubusercontent.com/koehlersimon/fallback/master/Resources/Public/Images/placeholder.jpg"
-                : `https://www.artic.edu/iiif/2/${item.image_id}/full/843,/0/default.jpg`,
-          }}
         />
         <View style={styles.description_container}>
           <Text style={styles.title_header} numberOfLines={1}>
