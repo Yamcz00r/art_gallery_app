@@ -4,12 +4,13 @@ const styles = StyleSheet.create({
   card_container: {
     margin: 10,
     position: "relative",
+    width: "100%"
   },
   card_image: {
-    width: "100%",
+    width: "70%",
     height: 300,
     borderRadius: 10,
-    resizeMode: "cover",
+    resizeMode: "contain",
   },
   description_container: {
     padding: 5,
@@ -17,13 +18,13 @@ const styles = StyleSheet.create({
   title_header: {
     fontFamily: "Poppins-Medium",
     color: "#FFF",
-    width: 170,
+    width: "auto",
     fontSize: 13,
   },
   artist_header: {
     fontFamily: "Poppins-Regular",
     color: "#FFF",
-    width: 170,
+    width: "auto",
     fontSize: 12,
   },
   heart_container: {

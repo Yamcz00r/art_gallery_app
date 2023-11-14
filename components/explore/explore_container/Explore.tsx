@@ -16,7 +16,7 @@ export default function Explore({items}: ExploreProps) {
                     <ExploreCard item={item}/>
                 )}
                 keyExtractor={item => item.id.toString()}
-                numColumns={2}
+                numColumns={1}
                 initialNumToRender={10}
             />
         </View>
