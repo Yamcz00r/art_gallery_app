@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { Stack } from "expo-router";
 import { useCallback } from "react";
 import { preventAutoHideAsync, hideAsync } from "expo-splash-screen";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+
 import { Ionicons } from "@expo/vector-icons";
 
 preventAutoHideAsync();
@@ -16,8 +16,6 @@ const StackLayout = () => {
   });
   const router = useRouter();
 
-  const client = new QueryClient();
-
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await hideAsync();
@@ -27,7 +25,6 @@ const StackLayout = () => {
   if (!fontsLoaded) return null;
 
   return (
-    <QueryClientProvider client={client}>
       <Stack
         screenOptions={{
           headerStyle: {
@@ -64,7 +61,7 @@ const StackLayout = () => {
           }}
         />
       </Stack>
-    </QueryClientProvider>
+
   );
 };
 export default StackLayout;

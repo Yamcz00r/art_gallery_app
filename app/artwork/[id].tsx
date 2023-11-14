@@ -6,22 +6,17 @@ import {
   Text,
 } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
-import { useQuery } from "@tanstack/react-query";
-import { fetchArtworkById } from "../api/api";
+import useFetchSingle from "../api/useFetchSingle";
 import Header from "../../components/details/header/Header";
+import DetailsBody from "../../components/details/body/Body";
 export default function ArtworkDetails() {
   const { id } = useGlobalSearchParams();
-  const { data, status, error } = useQuery({
-    queryFn: () => fetchArtworkById(Number(id)),
-    queryKey: ["artwork"],
-  });
-  
-  const item = data?.data;
+  const { result, isError, isLoading } = useFetchSingle(`artworks/${Number(id)}`)
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#111327" }}>
       <ScrollView showsHorizontalScrollIndicator={false}>
-        {status == "pending" ? (
+        {isLoading ? (
           <View
             style={{
               flex: 1,
@@ -32,7 +27,7 @@ export default function ArtworkDetails() {
           >
             <ActivityIndicator size="large" color="#FFF" />
           </View>
-        ) : error ? (
+        ) : isError ? (
           <Text
             style={{
               fontSize: 25,
@@ -41,18 +36,25 @@ export default function ArtworkDetails() {
               fontFamily: "Poppins-Bold",
             }}
           >
-            {error.message}
+            Something went wrong
           </Text>
         ) : (
-          <Header
-            artist_title={item?.artist_title}
-            date_display={item?.date_display}
-            date_end={item?.date_end}
-            date_start={item?.date_start}
-            image_id={item?.image_id}
-            place_of_origin={item?.place_of_origin}
-            title={item?.title}
-          />
+          <>
+            <Header
+              artist_title={result?.artist_title}
+              date_display={result?.date_display}
+              date_end={result?.date_end}
+              date_start={result?.date_start}
+              image_id={result?.image_id}
+              place_of_origin={result?.place_of_origin}
+              title={result?.title}
+            />
+            <DetailsBody
+              artist_title={result?.artist_title}
+              description={result?.description}
+              dimensions={result?.dimensions}
+            />
+          </>
         )}
       </ScrollView>
     </SafeAreaView>
