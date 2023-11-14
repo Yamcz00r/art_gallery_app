@@ -6,7 +6,7 @@ import {
   Text,
 } from "react-native";
 import { useGlobalSearchParams } from "expo-router";
-import useFetchSingle from "../api/useFetchSingle";
+import useFetchSingle from "../hooks/useFetchSingle";
 import Header from "../../components/details/header/Header";
 import DetailsBody from "../../components/details/body/Body";
 import Footer from "../../components/details/footer/Footer";
