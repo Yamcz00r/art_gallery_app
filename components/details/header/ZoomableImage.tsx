@@ -24,19 +24,7 @@ const PinchableImage = ({
   isVisible,
   handleClose,
 }: PinchableImageProps) => {
-  const scale = useSharedValue(1);
-  const savedScale = useSharedValue(1);
-  const pinch = Gesture.Pinch()
-    .onUpdate((e) => {
-        scale.value = savedScale.value * e.scale;
-    })
-    .onEnd(() => {
-        savedScale.value = scale.value;
-    })
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{scale: scale.value}]
-  }))
+  
 
 
   const CloseButton = () => (
@@ -44,6 +32,11 @@ const PinchableImage = ({
       <Ionicons name="close-outline" size={35} color="#FFF" />
     </Pressable>
   );
+
+  const pinch = Gesture.Pinch()
+    .onBegin((e) => {
+      console.log(e)
+    }) 
 
   return (
     <Modal
@@ -54,13 +47,11 @@ const PinchableImage = ({
       <View style={styles.modalContainer}>
         <CloseButton />
         <GestureDetector gesture={pinch}>
-          <Animated.View style={{ height, width }}>
-            <Image
+            <Animated.Image
               source={{ uri: imageUrl }}
               resizeMode="contain"
               style={styles.image}
             />
-          </Animated.View>
         </GestureDetector>
       </View>
     </Modal>
@@ -83,13 +74,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#111327",
     zIndex: 10,
   },
-  image_container: {
+  image: {
     height,
     width
-  },
-  image: {
-    height: "100%",
-    width: "100%",
   },
 });
 
