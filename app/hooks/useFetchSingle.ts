@@ -6,7 +6,7 @@ const useFetchSingle = (endpoint: string) => {
   const [isError, setIsError] = useState(false);
   const [result, setResult] = useState<ArtworkItem>();
 
-  const baseUrl = `https://api.artic.edu/api/v1/${endpoint}?fields=id,title,date_start,date_end,date_display,artist_title,place_of_origin,description,dimensions,medium_display,latitude,longitude,isZoomable,artist_id,image_id,artwork_type_title,department_title`;
+  const baseUrl = `https://api.artic.edu/api/v1/${endpoint}?fields=id,title,date_start,date_end,date_display,artist_title,place_of_origin,description,dimensions,medium_display,latitude,longitude,is_zoomable,artist_id,image_id,artwork_type_title,department_title`;
 
   useEffect(() => {
     setIsLoading(false);

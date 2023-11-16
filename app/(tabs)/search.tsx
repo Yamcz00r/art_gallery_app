@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import Explore from "../../components/explore/explore_container/Explore";
 import useFetchByQuery from "../hooks/useFetchByQuery";
+
 export default function Home() {
   const [query, setQuery] = useState("");
   const { results, isLoading, isError } = useFetchByQuery(query);

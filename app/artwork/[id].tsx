@@ -13,7 +13,7 @@ import Footer from "../../components/details/footer/Footer";
 export default function ArtworkDetails() {
   const { id } = useGlobalSearchParams();
   const { result, isError, isLoading } = useFetchSingle(`artworks/${Number(id)}`)
-
+  console.log(result)
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#111327" }}>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -49,6 +49,7 @@ export default function ArtworkDetails() {
               image_id={result?.image_id}
               place_of_origin={result?.place_of_origin}
               title={result?.title}
+              isZoomable={result?.is_zoomable}
             />
             <DetailsBody
               artist_title={result?.artist_title}

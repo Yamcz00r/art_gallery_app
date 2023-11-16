@@ -60,6 +60,12 @@ const StackLayout = () => {
             ),
           }}
         />
+        <Stack.Screen 
+          name="media/[image_id]"
+          options={{
+            headerShown: false
+          }} 
+        />
       </Stack>
 
   );

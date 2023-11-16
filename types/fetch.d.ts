@@ -21,7 +21,7 @@ export interface ArtworkItem {
   description?: string;
   dimensions?: string;
   medium_display?: string;
-  isZoomable?: boolean
+  is_zoomable?: boolean
   credit_line?: string;
   latitude?: number;
   longitude?: number;

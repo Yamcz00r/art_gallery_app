@@ -1,9 +1,7 @@
-import { useState } from "react";
-import { View, Text, Dimensions, Pressable } from "react-native";
-import { Image } from "expo-image";
+import { View, Text, Dimensions, Pressable, Image } from "react-native";
+import { useRouter } from "expo-router";
 import styles from "./Header.style";
-import Animated, {useAnimatedStyle, useSharedValue, withSpring} from "react-native-reanimated";
-import { Gesture, GestureDetector } from "react-native-gesture-handler";
+
 interface HeaderProps {
   image_id?: string;
   title?: string;
@@ -12,61 +10,52 @@ interface HeaderProps {
   date_start?: number;
   date_end?: number;
   date_display?: string;
+  isZoomable?: boolean;
 }
 
 const { width, height } = Dimensions.get("window");
 
 export default function Header(props: HeaderProps) {
-  // const [isVisible, setIsVisible] = useState(false);
-
-  // const handleClose = () => {
-  //   setIsVisible(false)
-  // }
-  const scale = useSharedValue(1);
-  const savedScale = useSharedValue(1);
-
-
-  const pinchGesture = Gesture.Pinch()
-    .onUpdate((e) => {
-      scale.value = savedScale.value * e.scale;
-      console.log(e.focalY)
-    })
-    .onEnd(() => {
-      savedScale.value = scale.value;
-    })
-    .onFinalize(() => {
-      scale.value = 1
-    })
-
-  const animatedStyle = useAnimatedStyle(() => ({
-    transform: [{scale: scale.value}]
-  }))
- 
-
-  //TODO: IMPLEMENT ZOOMING FUNCTIONALITY
+  const router = useRouter();
+  console.log(props.isZoomable)
   return (
     <View style={{ padding: 5 }}>
-      {/* <PinchableImage handleClose={handleClose} isVisible={isVisible} imageUrl={`https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`}/> */}
       <View style={styles.banner_container}>
-        {/* <Pressable onPress={() => setIsVisible(true)}> */}
-        <GestureDetector gesture={pinchGesture}>
-          <Animated.Image
-            style={[{
+        {props.isZoomable ? (
+          <Pressable onPress={() => router.push(`/media/${props.image_id}`)}>
+            <Image
+              style={{
+                width: width * 0.9,
+                height: height * 0.4,
+                resizeMode: "contain",
+                borderRadius: 10,
+                zIndex: 10,
+              }}
+              source={{
+                uri:
+                  props.image_id === null
+                    ? "https://raw.githubusercontent.com/koehlersimon/fallback/master/Resources/Public/Images/placeholder.jpg"
+                    : `https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`,
+              }}
+            />
+          </Pressable>
+        ) : (
+          <Image
+            style={{
               width: width * 0.9,
               height: height * 0.4,
               resizeMode: "contain",
               borderRadius: 10,
-              zIndex: 10
-            }, animatedStyle]}
+              zIndex: 10,
+            }}
             source={{
-              uri: props.image_id === null
-                ? "https://raw.githubusercontent.com/koehlersimon/fallback/master/Resources/Public/Images/placeholder.jpg"
-                : `https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`
+              uri:
+                props.image_id === null
+                  ? "https://raw.githubusercontent.com/koehlersimon/fallback/master/Resources/Public/Images/placeholder.jpg"
+                  : `https://www.artic.edu/iiif/2/${props.image_id}/full/843,/0/default.jpg`,
             }}
           />
-        </GestureDetector>
-
-        {/* </Pressable> */}
+        )}
       </View>
       <View style={styles.credits_container}>
         <Text style={styles.title_display}>{props.title}</Text>
