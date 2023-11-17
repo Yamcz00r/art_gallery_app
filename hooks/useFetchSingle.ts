@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ArtworkItem } from "../../types/fetch";
+import { ArtworkItem } from "../types/fetch";
 
 const useFetchSingle = (endpoint: string) => {
   const [isLoading, setIsLoading] = useState(false);

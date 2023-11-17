@@ -60,6 +60,21 @@ const StackLayout = () => {
             ),
           }}
         />
+        <Stack.Screen
+          name="artist/[id]"
+          options={{
+            headerTitle: `Details`,
+            headerLeft: (props) => (
+              <Ionicons.Button
+                name="arrow-back-outline"
+                backgroundColor="#111327"
+                color="#FFF"
+                size={25}
+                onPress={() => router.back()}
+              />
+            ),
+          }}
+        />
         <Stack.Screen 
           name="media/[image_id]"
           options={{

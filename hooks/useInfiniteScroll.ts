@@ -1,4 +1,4 @@
-import { ExploreArtworkItem } from "../../types/fetch";
+import { ExploreArtworkItem } from "../types/fetch";
 import { useState, useEffect } from "react";
 const useInfiniteScroll = (page: number, limit: number = 10) => {
   const [results, setResults] = useState<ExploreArtworkItem[]>([]);

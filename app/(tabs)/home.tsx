@@ -1,7 +1,7 @@
 import { ScrollView, SafeAreaView, Text } from "react-native";
 import { useState } from "react";
 import Explore from "../../components/explore/explore_container/Explore";
-import useInfiniteScroll from "../hooks/useInfiniteScroll";
+import useInfiniteScroll from "../../hooks/useInfiniteScroll";
 export default function Home() {
   const [pageNumber, setPageNumber] = useState(1);
   const { results, isLoading, isError, hasNextPage } =

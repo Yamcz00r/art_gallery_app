@@ -25,7 +25,7 @@ export interface ArtworkItem {
   credit_line?: string;
   latitude?: number;
   longitude?: number;
-  artist_id: number;
+  artist_id?: number;
   image_id?: string;
   artwork_type_title?: string;
   department_title?: string;

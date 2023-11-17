@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useState } from "react";
 import Explore from "../../components/explore/explore_container/Explore";
-import useFetchByQuery from "../hooks/useFetchByQuery";
+import useFetchByQuery from "../../hooks/useFetchByQuery";
 
 export default function Home() {
   const [query, setQuery] = useState("");

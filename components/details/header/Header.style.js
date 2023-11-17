@@ -25,7 +25,10 @@ const styles = StyleSheet.create({
     artist_display: {
         fontFamily: "Poppins-Medium",
         fontSize: 16,
-        color: "#e2e8f0"
+        color: "#e2e8f0",
+        textDecorationStyle: "solid",
+        textDecorationColor: "#e2e8f0",
+        textDecorationLine: "underline"
     }
     
 });

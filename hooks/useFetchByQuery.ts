@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { ExploreArtworkItem } from "../../types/fetch";
+import { ExploreArtworkItem } from "../types/fetch";
 
 const useFetchByQuery = (query: string) => {
   const [isLoading, setIsLoading] = useState(false);

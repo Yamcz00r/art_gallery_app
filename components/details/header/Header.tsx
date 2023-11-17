@@ -11,13 +11,13 @@ interface HeaderProps {
   date_end?: number;
   date_display?: string;
   isZoomable?: boolean;
+  artist_id?: number;
 }
 
 const { width, height } = Dimensions.get("window");
 
 export default function Header(props: HeaderProps) {
   const router = useRouter();
-  console.log(props.isZoomable)
   return (
     <View style={{ padding: 5 }}>
       <View style={styles.banner_container}>
@@ -60,11 +60,17 @@ export default function Header(props: HeaderProps) {
       <View style={styles.credits_container}>
         <Text style={styles.title_display}>{props.title}</Text>
         <Text style={styles.date_display}>{props.date_display}</Text>
-        <Text style={styles.artist_display}>
-          {`${props.artist_title} ${
-            props.place_of_origin === null ? "" : ", " + props.place_of_origin
-          }`}
-        </Text>
+        <Pressable
+          onPress={() => {
+            router.push(`/media/${props.artist_id}`);
+          }}
+        >
+          <Text style={styles.artist_display}>
+            {`${props.artist_title} ${
+              props.place_of_origin === null ? "" : ", " + props.place_of_origin
+            }`}
+          </Text>
+        </Pressable>
       </View>
     </View>
   );
