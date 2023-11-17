@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { Stack } from "expo-router";
 import { useCallback } from "react";
 import { preventAutoHideAsync, hideAsync } from "expo-splash-screen";
-
+import FavoritesContextProvider from "../context/FavoritesContext";
 import { Ionicons } from "@expo/vector-icons";
 
 preventAutoHideAsync();
@@ -25,6 +25,7 @@ const StackLayout = () => {
   if (!fontsLoaded) return null;
 
   return (
+    <FavoritesContextProvider>
       <Stack
         screenOptions={{
           headerStyle: {
@@ -75,14 +76,14 @@ const StackLayout = () => {
             ),
           }}
         />
-        <Stack.Screen 
+        <Stack.Screen
           name="media/[image_id]"
           options={{
-            headerShown: false
-          }} 
+            headerShown: false,
+          }}
         />
       </Stack>
-
+    </FavoritesContextProvider>
   );
 };
 export default StackLayout;
