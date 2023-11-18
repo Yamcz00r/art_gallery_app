@@ -7,7 +7,7 @@ export interface ArtworkResponse {
   pagination: {};
   data: ArtworkItem[];
   info: {};
-  config: {}
+  config: {};
 }
 
 export interface ArtworkItem {
@@ -21,7 +21,7 @@ export interface ArtworkItem {
   description?: string;
   dimensions?: string;
   medium_display?: string;
-  is_zoomable?: boolean
+  is_zoomable?: boolean;
   credit_line?: string;
   latitude?: number;
   longitude?: number;
@@ -31,9 +31,17 @@ export interface ArtworkItem {
   department_title?: string;
 }
 
+export interface ArtistItem {
+  id?: number;
+  title?: string;
+  birth_date?: number;
+  death_date?: number;
+  description?: string;
+}
+
 export interface ExploreArtworkItem {
-  id: number,
-  image_id?: string,
-  title?: string,
+  id?: number;
+  image_id?: string;
+  title?: string;
   artist_title?: string;
 }

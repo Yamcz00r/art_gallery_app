@@ -10,9 +10,11 @@ import useFetchSingle from "../../hooks/useFetchSingle";
 import Header from "../../components/details/header/Header";
 import DetailsBody from "../../components/details/body/Body";
 import Footer from "../../components/details/footer/Footer";
+import { ArtworkItem } from "../../types/fetch";
 export default function ArtworkDetails() {
   const { id } = useGlobalSearchParams();
-  const { result, isError, isLoading } = useFetchSingle(`artworks/${Number(id)}`)
+  console.log(id)
+  const { result, isError, isLoading } = useFetchSingle<ArtworkItem>(`artworks/${Number(id)}`, 'artwork')
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#111327" }}>
       <ScrollView showsHorizontalScrollIndicator={false}>
@@ -64,7 +66,7 @@ export default function ArtworkDetails() {
               artwork_type_title={result?.artwork_type_title}
               departament_title={result?.department_title}
             />
-            <Footer id={result?.id}/>
+            <Footer id={result?.id} artist_title={result?.artist_title} title={result?.title} image_id={result?.image_id}/>
           </>
         )}
       </ScrollView>

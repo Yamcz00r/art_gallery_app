@@ -62,7 +62,7 @@ export default function Header(props: HeaderProps) {
         <Text style={styles.date_display}>{props.date_display}</Text>
         <Pressable
           onPress={() => {
-            router.push(`/media/${props.artist_id}`);
+            router.push(`/artist/${props.artist_id}`);
           }}
         >
           <Text style={styles.artist_display}>

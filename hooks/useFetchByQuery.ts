@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { ExploreArtworkItem } from "../types/fetch";
 
-const useFetchByQuery = (query: string) => {
+const useFetchByQuery = (query: string | undefined) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [results, setResults] = useState<ExploreArtworkItem[]>([]);

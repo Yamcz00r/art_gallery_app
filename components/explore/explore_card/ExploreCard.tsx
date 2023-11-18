@@ -5,26 +5,33 @@ import styles from "./ExploreCard.style";
 import { useRouter } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { useState } from "react";
-
+import { useState, useContext } from "react";
+import { FavoritesContext, FavoritesContextType } from "../../../context/FavoritesContext";
 interface ExploreCardProps {
   item: ExploreArtworkItem;
+  itemId: number | undefined
 }
 
-export default function ExploreCard({ item }: ExploreCardProps) {
-  const [favoriteId, setFavoriteId] = useState("");
+export default function ExploreCard({ item, itemId }: ExploreCardProps) {
+  const { saveArtwork, getFavoriteArtwork, removeArtwork }: FavoritesContextType = useContext(FavoritesContext);
   const router = useRouter();
-  const handlePress = (id: number) => {
-    router.push(`/artwork/${id}`);
+  const artwork = getFavoriteArtwork(item?.id);
+
+  const handlePress = () => {
+    router.replace(`/artwork/${item.id}`);
   };
 
-  const handleHeartPress = (id: number) => {
-    setFavoriteId(item.id.toString());
+  const handleHeartPress = () => {
+    if (artwork) {
+      removeArtwork(item?.id);
+      return;
+    }
+    saveArtwork(item);
   };
-
+  
   return (
-    <View style={styles.card_container}>
-      <Pressable onPress={() => handlePress(item.id)}>
+    <View key={item.id} style={styles.card_container}>
+      <Pressable onPress={handlePress}>
         <Image
           source={`${
             item.image_id === null
@@ -44,10 +51,10 @@ export default function ExploreCard({ item }: ExploreCardProps) {
       </Pressable>
       <TouchableOpacity
         style={styles.heart_container}
-        onPress={() => handleHeartPress(item.id)}
+        onPress={() => handleHeartPress()}
       >
         <FontAwesome
-          name={favoriteId === item.id.toString() ? "heart" : "heart-o"}
+          name={artwork === item.id ? "heart" : "heart-o"}
           size={25}
           color="#dc2626"
         />

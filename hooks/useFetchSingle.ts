@@ -1,13 +1,14 @@
 import { useState, useEffect } from "react";
-import { ArtworkItem } from "../types/fetch";
+import { ArtistItem, ArtworkItem } from "../types/fetch";
 
-const useFetchSingle = (endpoint: string) => {
+const useFetchSingle = <T extends ArtistItem | ArtworkItem>(endpoint: string, destination: string) => {
   const [isLoading, setIsLoading] = useState(false);
   const [isError, setIsError] = useState(false);
-  const [result, setResult] = useState<ArtworkItem>();
+  const [result, setResult] = useState<T>();
 
-  const baseUrl = `https://api.artic.edu/api/v1/${endpoint}?fields=id,title,date_start,date_end,date_display,artist_title,place_of_origin,description,dimensions,medium_display,latitude,longitude,is_zoomable,artist_id,image_id,artwork_type_title,department_title`;
-
+  const fields = destination === 'artwork' ? 'id,title,date_start,date_end,date_display,artist_title,place_of_origin,description,dimensions,medium_display,latitude,longitude,is_zoomable,artist_id,image_id,artwork_type_title,department_title' : 'id,title,birth_date,death_date,description';
+  
+  const baseUrl = `https://api.artic.edu/api/v1/${endpoint}?fields=${fields}`;
   useEffect(() => {
     setIsLoading(false);
     setIsError(false);

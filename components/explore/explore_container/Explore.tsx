@@ -1,4 +1,3 @@
-import { memo } from "react";
 import { ExploreArtworkItem } from "../../../types/fetch";
 import {
   View,
@@ -17,13 +16,13 @@ interface ExploreProps {
   screen: string;
 }
 
-const Explore = memo(
-  ({ items, isLoading, fetchNextPage, screen }: ExploreProps) => (
+const Explore = ({ items, isLoading, fetchNextPage, screen }: ExploreProps) => {
+  return (
     <View style={styles.container}>
       <FlatList
         data={items}
-        renderItem={({ item }) => <ExploreCard item={item} />}
-        keyExtractor={(item) => item.id.toString()}
+        renderItem={({ item }) => <ExploreCard item={item} itemId={item.id} />}
+        keyExtractor={(item) => item!.id!.toString()}
         numColumns={2}
         initialNumToRender={100}
         ListFooterComponent={() =>
@@ -50,7 +49,7 @@ const Explore = memo(
         }
       />
     </View>
-  )
-);
+  );
+};
 
 export default Explore;
