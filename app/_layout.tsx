@@ -56,7 +56,7 @@ const StackLayout = () => {
                 backgroundColor="#111327"
                 color="#FFF"
                 size={25}
-                onPress={() => router.back()}
+                onPress={() => router.push('/(tabs)/home')}
               />
             ),
           }}
