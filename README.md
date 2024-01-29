@@ -1,1 +1,1 @@
-
+To launch this application after npm install, you need to get an mobile app called Expo Go. Then you need to run "expo start" in your console. It will generate a QR code for you and you need to scan it using this mobile app, then you can see an app in your mobile phone.
